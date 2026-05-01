@@ -102,7 +102,7 @@ resume: # optional
 # Site settings
 # ─────────────────────────────────────────────
 settings:
-  layout: minimal | engineer # Which layout to use
+  layout: minimal | engineer # Default layout on first visit — user can switch at runtime via the Layout toggle button
   theme: light | dark | system # Default theme
   sections: # optional — ordered list of visible sections
     - about
@@ -122,5 +122,5 @@ Common issues:
 
 - `url` fields must be valid URLs (include `https://`).
 - `email` must be a valid email format.
-- `settings.layout` must be exactly `minimal` or `engineer`.
+- `settings.layout` must be exactly `minimal` or `engineer` (sets the default; users can switch at runtime).
 - `settings.theme` must be exactly `light`, `dark`, or `system`.

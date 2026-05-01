@@ -147,6 +147,11 @@ p {
   color: var(--color-text-muted);
 }
 
+/* ─── Layout switching ────────────────────────────────────────────────────── */
+
+html[data-layout="minimal"]  .layout-engineer { display: none; }
+html[data-layout="engineer"] .layout-minimal  { display: none; }
+
 /* ─── Scrollbar ───────────────────────────────────────────────────────────── */
 
 ::-webkit-scrollbar {

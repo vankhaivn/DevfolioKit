@@ -1,5 +1,4 @@
 ---
-import BaseLayout from '@/layouts/BaseLayout.astro';
 import Header from '@/components/Header.astro';
 import About from '@/components/sections/About.astro';
 import Experience from '@/components/sections/Experience.astro';
@@ -22,40 +21,38 @@ const sections = config.settings.sections ?? [
 const showSection = (name: string) => sections.includes(name);
 ---
 
-<BaseLayout config={config}>
-  <div class="layout-minimal">
-    <div class="container">
-      <Header config={config} />
+<div class="layout-minimal">
+  <div class="container">
+    <Header config={config} />
 
-      <main id="main-content">
-        {showSection('about') && <About config={config} />}
-        {showSection('experience') && config.experience && config.experience.length > 0 && (
-          <Experience experience={config.experience} />
-        )}
-        {showSection('projects') && config.projects && config.projects.length > 0 && (
-          <Projects projects={config.projects} variant="list" />
-        )}
-        {showSection('skills') && config.skills && config.skills.length > 0 && (
-          <Skills skills={config.skills} />
-        )}
-        {(showSection('education') || showSection('certifications')) && (
-          <Education
-            education={showSection('education') ? config.education : []}
-            certifications={showSection('certifications') ? config.certifications : []}
-          />
-        )}
-        {showSection('contact') && <Contact config={config} />}
-      </main>
+    <main id="main-content-minimal">
+      {showSection('about') && <About config={config} />}
+      {showSection('experience') && config.experience && config.experience.length > 0 && (
+        <Experience experience={config.experience} />
+      )}
+      {showSection('projects') && config.projects && config.projects.length > 0 && (
+        <Projects projects={config.projects} variant="list" />
+      )}
+      {showSection('skills') && config.skills && config.skills.length > 0 && (
+        <Skills skills={config.skills} />
+      )}
+      {(showSection('education') || showSection('certifications')) && (
+        <Education
+          education={showSection('education') ? config.education : []}
+          certifications={showSection('certifications') ? config.certifications : []}
+        />
+      )}
+      {showSection('contact') && <Contact config={config} />}
+    </main>
 
-      <footer class="site-footer">
-        <a href="https://github.com/vankhaivn/DevfolioKit" target="_blank" rel="noopener noreferrer" class="footer-brand">
-          <img src="/favicon.svg" alt="DevfolioKit logo" class="footer-logo" />
-          <span class="footer-name">DevfolioKit</span>
-        </a>
-      </footer>
-    </div>
+    <footer class="site-footer">
+      <a href="https://github.com/vankhaivn/DevfolioKit" target="_blank" rel="noopener noreferrer" class="footer-brand">
+        <img src="/favicon.svg" alt="DevfolioKit logo" class="footer-logo" />
+        <span class="footer-name">DevfolioKit</span>
+      </a>
+    </footer>
   </div>
-</BaseLayout>
+</div>
 
 <style>
   .layout-minimal {

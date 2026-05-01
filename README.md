@@ -45,7 +45,7 @@ See [docs/CONFIG_SPEC.md](docs/CONFIG_SPEC.md) for the full schema reference.
 
 ## Layouts
 
-Set `settings.layout` in your YAML:
+Set `settings.layout` in your YAML (visitors can switch at runtime):
 
 | Layout     | Description                                                                   |
 | ---------- | ----------------------------------------------------------------------------- |

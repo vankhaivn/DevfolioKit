@@ -14,10 +14,11 @@ const pageDescription = site.description;
 const canonicalUrl = site.url;
 const ogImage = site.ogImage ?? (canonicalUrl ? `${canonicalUrl}/og.png` : undefined);
 const defaultTheme = settings.theme;
+const defaultLayout = settings.layout;
 ---
 
 <!doctype html>
-<html lang="en" data-theme={defaultTheme === 'dark' ? 'dark' : 'light'}>
+<html lang="en" data-theme={defaultTheme === 'dark' ? 'dark' : 'light'} data-layout={defaultLayout}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -41,20 +42,25 @@ const defaultTheme = settings.theme;
     <meta name="twitter:description" content={pageDescription} />
     {ogImage && <meta name="twitter:image" content={ogImage} />}
 
-    <!-- Favicon placeholder -->
+    <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 
-    <!-- Theme initialization — runs before paint to prevent FOUC -->
-    <script is:inline define:vars={{ defaultTheme }}>
+    <!-- Theme + Layout init — runs before paint to prevent FOUC / FOWL -->
+    <script is:inline define:vars={{ defaultTheme, defaultLayout }}>
       (function () {
-        const stored = localStorage.getItem('devfolio-theme');
-        const theme = stored || defaultTheme;
+        // Theme
+        const storedTheme = localStorage.getItem('devfolio-theme');
+        const theme = storedTheme || defaultTheme;
         if (theme === 'system') {
           const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
           document.documentElement.setAttribute('data-theme', prefersDark ? 'dark' : 'light');
         } else {
           document.documentElement.setAttribute('data-theme', theme);
         }
+        // Layout
+        const storedLayout = localStorage.getItem('devfolio-layout');
+        const layout = storedLayout || defaultLayout;
+        document.documentElement.setAttribute('data-layout', layout);
       })();
     </script>
   </head>

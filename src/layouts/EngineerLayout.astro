@@ -1,5 +1,4 @@
 ---
-import BaseLayout from '@/layouts/BaseLayout.astro';
 import Header from '@/components/Header.astro';
 import About from '@/components/sections/About.astro';
 import Experience from '@/components/sections/Experience.astro';
@@ -22,47 +21,45 @@ const sections = config.settings.sections ?? [
 const showSection = (name: string) => sections.includes(name);
 ---
 
-<BaseLayout config={config}>
-  <div class="layout-engineer">
-    <div class="container-wide">
-      <Header config={config} />
+<div class="layout-engineer">
+  <div class="container-wide">
+    <Header config={config} />
 
-      <main id="main-content" class="engineer-grid">
-        <!-- Sidebar -->
-        <aside class="engineer-sidebar">
-          {showSection('about') && <About config={config} variant="engineer" />}
-          {showSection('skills') && config.skills && config.skills.length > 0 && (
-            <Skills skills={config.skills} />
-          )}
-          {(showSection('education') || showSection('certifications')) && (
-            <Education
-              education={showSection('education') ? config.education : []}
-              certifications={showSection('certifications') ? config.certifications : []}
-            />
-          )}
-          {showSection('contact') && <Contact config={config} />}
-        </aside>
+    <main id="main-content-engineer" class="engineer-grid">
+      <!-- Sidebar -->
+      <aside class="engineer-sidebar">
+        {showSection('about') && <About config={config} variant="engineer" />}
+        {showSection('skills') && config.skills && config.skills.length > 0 && (
+          <Skills skills={config.skills} />
+        )}
+        {(showSection('education') || showSection('certifications')) && (
+          <Education
+            education={showSection('education') ? config.education : []}
+            certifications={showSection('certifications') ? config.certifications : []}
+          />
+        )}
+        {showSection('contact') && <Contact config={config} />}
+      </aside>
 
-        <!-- Main content -->
-        <div class="engineer-main">
-          {showSection('projects') && config.projects && config.projects.length > 0 && (
-            <Projects projects={config.projects} variant="grid" />
-          )}
-          {showSection('experience') && config.experience && config.experience.length > 0 && (
-            <Experience experience={config.experience} />
-          )}
-        </div>
-      </main>
+      <!-- Main content -->
+      <div class="engineer-main">
+        {showSection('projects') && config.projects && config.projects.length > 0 && (
+          <Projects projects={config.projects} variant="grid" />
+        )}
+        {showSection('experience') && config.experience && config.experience.length > 0 && (
+          <Experience experience={config.experience} />
+        )}
+      </div>
+    </main>
 
-      <footer class="site-footer">
-        <a href="https://github.com/vankhaivn/DevfolioKit" target="_blank" rel="noopener noreferrer" class="footer-brand">
-          <img src="/favicon.svg" alt="DevfolioKit logo" class="footer-logo" />
-          <span class="footer-name">DevfolioKit</span>
-        </a>
-      </footer>
-    </div>
+    <footer class="site-footer">
+      <a href="https://github.com/vankhaivn/DevfolioKit" target="_blank" rel="noopener noreferrer" class="footer-brand">
+        <img src="/favicon.svg" alt="DevfolioKit logo" class="footer-logo" />
+        <span class="footer-name">DevfolioKit</span>
+      </a>
+    </footer>
   </div>
-</BaseLayout>
+</div>
 
 <style>
   .layout-engineer {

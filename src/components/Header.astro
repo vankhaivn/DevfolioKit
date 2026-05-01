@@ -1,5 +1,6 @@
 ---
 import ThemeToggle from '@/components/ui/ThemeToggle.tsx';
+import LayoutToggle from '@/components/ui/LayoutToggle.tsx';
 import ResumeButton from '@/components/ui/ResumeButton.astro';
 import type { Config } from '@/lib/schema.js';
 
@@ -61,6 +62,7 @@ const socialIcons: Record<string, string> = {
       )}
 
       <ThemeToggle client:load />
+      <LayoutToggle client:load />
 
       {resume && (
         <ResumeButton path={resume.path} label={resume.label} />

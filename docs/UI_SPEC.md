@@ -128,6 +128,10 @@ Muted text, placed right below the name.
 
 Icon button cycling (Sun → Moon → Monitor).
 
+#### Layout Toggle
+
+Icon button toggling between Minimal (single-column) and Engineer (sidebar + grid) layouts. Preference is saved to `localStorage['devfolio-layout']`. The YAML `settings.layout` sets the default shown on first visit.
+
 #### Resume Button
 
 Prominent CTA button, hidden if resume.path is not configured.

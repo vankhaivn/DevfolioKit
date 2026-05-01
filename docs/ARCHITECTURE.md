@@ -20,12 +20,14 @@ src/lib/config.ts (loadConfig)
 src/lib/schema.ts (Zod parse → typed Config)
        │
        ▼
-src/pages/index.astro (reads layout from config)
+src/pages/index.astro
        │
-       ├── MinimalLayout.astro
-       └── EngineerLayout.astro
+       ▼
+BaseLayout.astro (HTML shell — renders both layouts)
+       ├── MinimalLayout.astro  ← always in DOM
+       └── EngineerLayout.astro ← always in DOM
               │
-              ▼
+              ▼ (CSS data-layout attribute controls which is visible)
         Section components (About, Experience, Projects, Skills, Education, Contact)
 ```
 
@@ -68,6 +70,20 @@ Located in `src/components/sections/`.
 
 Only used for interactive UI:
 - `ThemeToggle.tsx` — reads/writes `localStorage.devfolio-theme`, toggles `data-theme` on `<html>`.
+- `LayoutToggle.tsx` — reads/writes `localStorage.devfolio-layout`, toggles `data-layout` on `<html>`.
+
+### Layout Switching
+
+Both `MinimalLayout` and `EngineerLayout` are rendered into the HTML at all times. The active layout is controlled by a `data-layout` attribute on `<html>`:
+
+```css
+html[data-layout="minimal"]  .layout-engineer { display: none; }
+html[data-layout="engineer"] .layout-minimal  { display: none; }
+```
+
+- `settings.layout` in YAML sets the **default** layout shown on first visit.
+- Visitors can switch layout at runtime via the `LayoutToggle` button in the header.
+- An inline script in `<head>` reads `localStorage['devfolio-layout']` and applies it before first paint to prevent flash of wrong layout (FOWL).
 
 ### Theming
 
@@ -78,10 +94,18 @@ Only used for interactive UI:
 
 ## Adding a New Layout
 
-1. Create `src/layouts/YourLayout.astro`.
+1. Create `src/layouts/YourLayout.astro` (no `<BaseLayout>` wrapper — just a `<div class="layout-your">` fragment).
 2. Accept `config: Config` as a prop.
-3. Register it in `src/pages/index.astro` layout switch.
+3. Add the layout's `<div>` to `src/pages/index.astro` inside `<BaseLayout>`.
 4. Add `your-layout` to the `settings.layout` enum in `src/lib/schema.ts`.
+5. Add CSS show/hide rules to `src/styles/global.css`:
+   ```css
+   html[data-layout="minimal"]   .layout-your    { display: none; }
+   html[data-layout="engineer"]  .layout-your    { display: none; }
+   html[data-layout="your-layout"] .layout-minimal  { display: none; }
+   html[data-layout="your-layout"] .layout-engineer { display: none; }
+   ```
+6. Extend `LayoutToggle.tsx` to cycle through the new layout.
 
 ## Adding a New Section
 
