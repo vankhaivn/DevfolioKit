@@ -1,0 +1,20 @@
+---
+/**
+ * Blog index — NOT implemented in MVP.
+ *
+ * To add blog support:
+ * 1. Define a content collection in src/content/config.ts
+ * 2. Add .md / .mdx posts to src/content/blog/
+ * 3. Replace this file with a real listing page using getCollection('blog')
+ * 4. Create src/pages/blog/[slug].astro for individual posts
+ * 5. Optionally gate via config: settings.blog.enabled
+ *
+ * See docs/ARCHITECTURE.md — "Future: Blog / Case Studies" section.
+ */
+import { loadConfig } from '@/lib/config.js';
+
+const config = loadConfig();
+
+// Redirect to home — blog not yet implemented
+return Astro.redirect('/');
+---

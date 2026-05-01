@@ -92,12 +92,78 @@ Only used for interactive UI:
 
 ## Future: Blog / Case Studies
 
-The intended path for adding blog support:
-- Add `src/pages/blog/[slug].astro` for individual posts.
-- Add Markdown or MDX content in `src/content/blog/`.
-- Use Astro's Content Collections API.
-- Config can optionally include `blog.enabled: true`.
-- No blog UI is shipped in MVP. The `src/pages/blog/` directory is reserved.
+Placeholder structure is already in place. No UI is rendered in MVP.
+
+### Existing placeholders
+
+```
+src/
+├── content/
+│   └── blog/                  ← Drop .md / .mdx posts here
+└── pages/
+    └── blog/
+        ├── index.astro        ← Redirects to / until implemented
+        └── [slug].astro       ← Returns no static paths until implemented
+```
+
+### Step-by-step to activate
+
+**Step 1 — Define the content collection** (`src/content/config.ts`):
+```ts
+import { defineCollection, z } from 'astro:content';
+
+const blog = defineCollection({
+  type: 'content',
+  schema: z.object({
+    title: z.string(),
+    date: z.string(),
+    description: z.string().optional(),
+    tags: z.array(z.string()).optional(),
+    draft: z.boolean().default(false),
+  }),
+});
+
+export const collections = { blog };
+```
+
+**Step 2 — Add posts** to `src/content/blog/my-post.md`:
+```md
+---
+title: "My First Post"
+date: "2024-06-01"
+description: "A short intro."
+tags: [engineering, open-source]
+---
+
+Post content here...
+```
+
+**Step 3 — Implement listing page** (`src/pages/blog/index.astro`):
+```ts
+import { getCollection } from 'astro:content';
+const posts = (await getCollection('blog'))
+  .filter(p => !p.data.draft)
+  .sort((a, b) => b.data.date.localeCompare(a.data.date));
+```
+
+**Step 4 — Implement post page** (`src/pages/blog/[slug].astro`):
+```ts
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  return posts.map(post => ({ params: { slug: post.slug }, props: { post } }));
+}
+const { post } = Astro.props;
+const { Content } = await post.render();
+```
+
+**Step 5 — Optional config gate** — add to `src/lib/schema.ts`:
+```ts
+settings: z.object({
+  // ... existing fields
+  blog: z.object({ enabled: z.boolean().default(false) }).optional(),
+})
+```
+Then conditionally show blog links in Header/nav only when `settings.blog.enabled` is true.
 
 ## Constraints
 

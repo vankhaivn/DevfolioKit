@@ -348,7 +348,7 @@ Verify `pnpm build` and `pnpm validate` pass cleanly.
 
 ## TASK-013 — Blog/case-study architecture placeholder
 
-Status: open
+Status: done
 
 ### Goal
 
