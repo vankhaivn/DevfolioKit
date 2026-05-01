@@ -30,7 +30,7 @@ const showSection = (name: string) => sections.includes(name);
       <main id="main-content" class="engineer-grid">
         <!-- Sidebar -->
         <aside class="engineer-sidebar">
-          {showSection('about') && <About config={config} />}
+          {showSection('about') && <About config={config} variant="engineer" />}
           {showSection('skills') && config.skills && config.skills.length > 0 && (
             <Skills skills={config.skills} />
           )}
