@@ -1,0 +1,100 @@
+---
+import type { Config } from '../../lib/schema.js';
+
+interface Props {
+  config: Config;
+}
+
+const { config } = Astro.props;
+const { profile, social } = config;
+
+const hasContact = profile.email || profile.phone || (social && social.length > 0);
+
+const platformLabels: Record<string, string> = {
+  github: 'GitHub',
+  linkedin: 'LinkedIn',
+  twitter: 'Twitter / X',
+  mastodon: 'Mastodon',
+  youtube: 'YouTube',
+  website: 'Website',
+};
+---
+
+{hasContact && (
+  <section class="section" id="contact" aria-labelledby="contact-heading">
+    <h2 class="section-title" id="contact-heading">Contact</h2>
+
+    <div class="contact-list">
+      {profile.email && (
+        <a href={`mailto:${profile.email}`} class="contact-item">
+          <span class="contact-platform">Email</span>
+          <span class="contact-value">{profile.email}</span>
+        </a>
+      )}
+
+      {profile.phone && (
+        <a href={`tel:${profile.phone}`} class="contact-item">
+          <span class="contact-platform">Phone</span>
+          <span class="contact-value">{profile.phone}</span>
+        </a>
+      )}
+
+      {social && social.map((link) => (
+        <a
+          href={link.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="contact-item"
+        >
+          <span class="contact-platform">{platformLabels[link.platform.toLowerCase()] ?? link.platform}</span>
+          <span class="contact-value">{link.label ?? link.url}</span>
+        </a>
+      ))}
+    </div>
+  </section>
+)}
+
+<style>
+  .contact-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .contact-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    text-decoration: none;
+    color: inherit;
+    transition: color 0.15s;
+    padding: 0.625rem 0.875rem;
+    border-radius: 0.5rem;
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    transition: border-color 0.15s, background-color 0.15s;
+  }
+
+  .contact-item:hover {
+    border-color: var(--color-accent);
+    background-color: var(--color-accent-subtle);
+    text-decoration: none;
+  }
+
+  .contact-platform {
+    font-size: 0.8125rem;
+    font-weight: 600;
+    color: var(--color-text-muted);
+    min-width: 5rem;
+    flex-shrink: 0;
+  }
+
+  .contact-value {
+    font-size: 0.875rem;
+    color: var(--color-accent);
+  }
+
+  .contact-item:hover .contact-value {
+    color: var(--color-accent-hover);
+  }
+</style>

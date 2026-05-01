@@ -1,0 +1,64 @@
+---
+import '../styles/global.css';
+import type { Config } from '../lib/schema.js';
+
+interface Props {
+  config: Config;
+}
+
+const { config } = Astro.props;
+const { site, profile, settings } = config;
+
+const pageTitle = site.title;
+const pageDescription = site.description;
+const canonicalUrl = site.url;
+const ogImage = site.ogImage ?? (canonicalUrl ? `${canonicalUrl}/og.png` : undefined);
+const defaultTheme = settings.theme;
+---
+
+<!doctype html>
+<html lang="en" data-theme={defaultTheme === 'dark' ? 'dark' : 'light'}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content={Astro.generator} />
+
+    <!-- SEO -->
+    <title>{pageTitle}</title>
+    <meta name="description" content={pageDescription} />
+    {canonicalUrl && <link rel="canonical" href={canonicalUrl} />}
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={pageDescription} />
+    {canonicalUrl && <meta property="og:url" content={canonicalUrl} />}
+    {ogImage && <meta property="og:image" content={ogImage} />}
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={pageDescription} />
+    {ogImage && <meta name="twitter:image" content={ogImage} />}
+
+    <!-- Favicon placeholder -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <!-- Theme initialization — runs before paint to prevent FOUC -->
+    <script is:inline define:vars={{ defaultTheme }}>
+      (function () {
+        const stored = localStorage.getItem('devfolio-theme');
+        const theme = stored || defaultTheme;
+        if (theme === 'system') {
+          const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          document.documentElement.setAttribute('data-theme', prefersDark ? 'dark' : 'light');
+        } else {
+          document.documentElement.setAttribute('data-theme', theme);
+        }
+      })();
+    </script>
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>

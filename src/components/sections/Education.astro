@@ -1,0 +1,125 @@
+---
+import type { Education, Certification } from '../../lib/schema.js';
+
+interface Props {
+  education?: Education[];
+  certifications?: Certification[];
+}
+
+const { education = [], certifications = [] } = Astro.props;
+
+const hasContent = education.length > 0 || certifications.length > 0;
+---
+
+{hasContent && (
+  <section class="section" id="education" aria-labelledby="education-heading">
+    <h2 class="section-title" id="education-heading">Education & Certifications</h2>
+
+    {education.length > 0 && (
+      <div class="edu-list">
+        {education.map((edu) => (
+          <div class="edu-item">
+            <div class="edu-main">
+              <h3 class="edu-degree">{edu.degree}{edu.field ? `, ${edu.field}` : ''}</h3>
+              <span class="edu-institution">{edu.institution}</span>
+            </div>
+            {(edu.start || edu.end) && (
+              <div class="edu-dates">
+                {edu.start && <time datetime={edu.start}>{edu.start}</time>}
+                {edu.start && edu.end && <span aria-hidden="true"> – </span>}
+                {edu.end && <time datetime={edu.end}>{edu.end}</time>}
+              </div>
+            )}
+            {edu.notes && <p class="edu-notes">{edu.notes}</p>}
+          </div>
+        ))}
+      </div>
+    )}
+
+    {certifications.length > 0 && (
+      <div class={education.length > 0 ? 'cert-list cert-list--spaced' : 'cert-list'}>
+        {certifications.map((cert) => (
+          <div class="cert-item">
+            <div class="cert-main">
+              <h3 class="cert-name">
+                {cert.url ? (
+                  <a href={cert.url} target="_blank" rel="noopener noreferrer">{cert.name}</a>
+                ) : cert.name}
+              </h3>
+              <span class="cert-issuer">{cert.issuer}</span>
+            </div>
+            {cert.date && (
+              <div class="cert-date">
+                <time datetime={cert.date}>{cert.date}</time>
+              </div>
+            )}
+          </div>
+        ))}
+      </div>
+    )}
+  </section>
+)}
+
+<style>
+  .edu-list,
+  .cert-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .cert-list--spaced {
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--color-border);
+  }
+
+  .edu-item,
+  .cert-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .edu-degree,
+  .cert-name {
+    font-size: 0.9375rem;
+    font-weight: 600;
+    color: var(--color-text);
+    margin-bottom: 0.15rem;
+  }
+
+  .cert-name a {
+    color: var(--color-text);
+    text-decoration: none;
+    transition: color 0.15s;
+  }
+
+  .cert-name a:hover {
+    color: var(--color-accent);
+  }
+
+  .edu-institution,
+  .cert-issuer {
+    display: block;
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+  }
+
+  .edu-dates,
+  .cert-date {
+    font-size: 0.8125rem;
+    color: var(--color-text-subtle);
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .edu-notes {
+    font-size: 0.8125rem;
+    color: var(--color-text-subtle);
+    margin-top: 0.375rem;
+    width: 100%;
+  }
+</style>

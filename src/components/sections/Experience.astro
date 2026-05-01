@@ -1,0 +1,158 @@
+---
+import type { WorkExperience } from '../../lib/schema.js';
+
+interface Props {
+  experience: WorkExperience[];
+}
+
+const { experience } = Astro.props;
+
+function formatDate(dateStr: string): string {
+  const [year, month] = dateStr.split('-');
+  if (!month) return year ?? dateStr;
+  const d = new Date(parseInt(year ?? '0'), parseInt(month ?? '0') - 1);
+  return d.toLocaleDateString('en-US', { month: 'short', year: 'numeric' });
+}
+---
+
+{experience.length > 0 && (
+  <section class="section" id="experience" aria-labelledby="experience-heading">
+    <h2 class="section-title" id="experience-heading">Experience</h2>
+
+    <div class="experience-list">
+      {experience.map((job) => (
+        <article class="job-item">
+          <div class="job-header">
+            <div class="job-meta">
+              <h3 class="job-role">{job.role}</h3>
+              <div class="job-company-row">
+                <span class="job-company">{job.company}</span>
+                {job.location && (
+                  <>
+                    <span class="job-sep" aria-hidden="true">·</span>
+                    <span class="job-location">{job.location}</span>
+                  </>
+                )}
+              </div>
+            </div>
+            <div class="job-dates" aria-label={`${formatDate(job.start)} to ${job.end ? formatDate(job.end) : 'Present'}`}>
+              <time datetime={job.start}>{formatDate(job.start)}</time>
+              <span aria-hidden="true"> – </span>
+              {job.end ? (
+                <time datetime={job.end}>{formatDate(job.end)}</time>
+              ) : (
+                <span class="job-current">Present</span>
+              )}
+            </div>
+          </div>
+
+          {job.summary && (
+            <p class="job-summary">{job.summary}</p>
+          )}
+
+          {job.highlights && job.highlights.length > 0 && (
+            <ul class="job-highlights">
+              {job.highlights.map((h) => (
+                <li>{h}</li>
+              ))}
+            </ul>
+          )}
+        </article>
+      ))}
+    </div>
+  </section>
+)}
+
+<style>
+  .experience-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .job-item {
+    padding-block: 1.5rem;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .job-item:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+
+  .job-item:first-child {
+    padding-top: 0;
+  }
+
+  .job-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-bottom: 0.625rem;
+    flex-wrap: wrap;
+  }
+
+  .job-role {
+    font-size: 0.9375rem;
+    font-weight: 600;
+    color: var(--color-text);
+    margin-bottom: 0.15rem;
+  }
+
+  .job-company-row {
+    display: flex;
+    align-items: center;
+    gap: 0.375rem;
+    flex-wrap: wrap;
+  }
+
+  .job-company {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--color-accent);
+  }
+
+  .job-sep {
+    color: var(--color-text-subtle);
+    font-size: 0.75rem;
+  }
+
+  .job-location {
+    font-size: 0.8125rem;
+    color: var(--color-text-subtle);
+  }
+
+  .job-dates {
+    font-size: 0.8125rem;
+    color: var(--color-text-subtle);
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .job-current {
+    color: var(--color-accent);
+    font-weight: 500;
+  }
+
+  .job-summary {
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+    margin-bottom: 0.75rem;
+    line-height: 1.6;
+  }
+
+  .job-highlights {
+    margin: 0;
+    padding-left: 1.125rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+
+  .job-highlights li {
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+    line-height: 1.6;
+  }
+</style>

@@ -1,0 +1,29 @@
+{
+  "name": "devfoliokit",
+  "type": "module",
+  "version": "0.1.0",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "validate": "tsx scripts/validate.ts",
+    "launch": "tsx scripts/launch.ts"
+  },
+  "dependencies": {
+    "@astrojs/react": "^4.3.0",
+    "astro": "^5.7.0",
+    "js-yaml": "^4.1.0",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "zod": "^3.24.4"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "^4.1.5",
+    "@types/js-yaml": "^4.0.9",
+    "@types/react": "^19.1.2",
+    "@types/react-dom": "^19.1.2",
+    "tailwindcss": "^4.1.5",
+    "tsx": "^4.19.4",
+    "typescript": "^5.8.3"
+  }
+}

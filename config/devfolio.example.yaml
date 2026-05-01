@@ -1,0 +1,144 @@
+# ─────────────────────────────────────────────────────────────────────────────
+# DevfolioKit — Example Config
+# Copy this file to config/devfolio.yaml and fill in your real data.
+# Run `pnpm validate` to check for errors.
+# ─────────────────────────────────────────────────────────────────────────────
+
+site:
+  title: "Alex Rivera — Full-Stack Engineer"
+  description: "Portfolio and resume of Alex Rivera, a full-stack and DevOps engineer based in San Francisco."
+  url: "https://alexrivera.dev"
+
+profile:
+  name: "Alex Rivera"
+  headline: "Full-Stack Engineer & DevOps Enthusiast"
+  summary: |
+    I build scalable backend systems and ship clean, performant frontends.
+    Passionate about developer tooling, infrastructure automation, and open source.
+    6+ years building products that developers actually enjoy using.
+  location: "San Francisco, CA"
+  avatar: "/avatar.jpg"
+  email: "alex@example.com"
+
+social:
+  - platform: github
+    url: "https://github.com/alexrivera"
+    label: "alexrivera"
+  - platform: linkedin
+    url: "https://linkedin.com/in/alexrivera"
+    label: "Alex Rivera"
+  - platform: twitter
+    url: "https://twitter.com/alexrivera"
+    label: "@alexrivera"
+
+skills:
+  - category: Languages
+    items: [TypeScript, Python, Go, Rust, SQL, Bash]
+  - category: Frontend
+    items: [React, Next.js, Astro, Tailwind CSS, WebAssembly]
+  - category: Backend
+    items: [Node.js, FastAPI, PostgreSQL, Redis, GraphQL, gRPC]
+  - category: Infrastructure
+    items: [Docker, Kubernetes, Terraform, AWS, GitHub Actions, Prometheus]
+
+experience:
+  - company: Acme Cloud
+    role: Senior Software Engineer
+    start: "2022-03"
+    location: "San Francisco, CA (Remote)"
+    summary: Led platform engineering for a B2B SaaS product serving 50k+ users.
+    highlights:
+      - Reduced API p99 latency by 40% by migrating to async task queues.
+      - Built a multi-tenant RBAC system adopted across 5 product teams.
+      - Automated infrastructure provisioning with Terraform, cutting deploy time by 60%.
+      - Led a team of 4 engineers through a zero-downtime database migration.
+
+  - company: DevStream Inc.
+    role: Software Engineer
+    start: "2019-06"
+    end: "2022-02"
+    location: "Austin, TX"
+    summary: Full-stack engineer on a developer productivity platform.
+    highlights:
+      - Shipped real-time collaboration features using WebSockets and CRDTs.
+      - Migrated a monolith to microservices, improving release cadence 3×.
+      - Mentored 3 junior engineers through structured code reviews and pair programming.
+      - Built an internal CLI tool adopted by the entire engineering org.
+
+  - company: ByteLab
+    role: Junior Software Engineer
+    start: "2017-08"
+    end: "2019-05"
+    location: "Austin, TX"
+    summary: Early engineer at a fintech startup building payment infrastructure.
+    highlights:
+      - Built a payment integration layer supporting 4 processors (Stripe, Braintree, PayPal, Square).
+      - Maintained CI/CD pipelines on CircleCI and AWS CodePipeline.
+      - Improved test coverage from 30% to 80% in the core payment module.
+
+projects:
+  - name: Forge CLI
+    description: A batteries-included CLI toolkit for modern TypeScript projects — scaffolding, linting, testing, and release automation in one binary.
+    repo: "https://github.com/alexrivera/forge-cli"
+    tags: [TypeScript, Node.js, Open Source]
+    highlights:
+      - 1,200+ GitHub stars, used by 300+ open-source projects.
+      - Plugin architecture allows custom command extensions.
+      - Ships with zero-config support for ESM, Vitest, and semantic-release.
+
+  - name: KubeWatch
+    description: Lightweight Kubernetes event streamer that posts real-time alerts to Slack and PagerDuty with configurable filters and routing rules.
+    repo: "https://github.com/alexrivera/kubewatch"
+    tags: [Go, Kubernetes, DevOps]
+    highlights:
+      - Handles 10k+ events/min with under 20MB memory footprint.
+      - Used in production by 3 companies to replace paid monitoring tools.
+      - Helm chart available for one-command cluster deployment.
+
+  - name: SQLens
+    description: Visual query plan analyzer for PostgreSQL — paste a query, get an annotated execution plan with optimization suggestions and index recommendations.
+    url: "https://sqlens.dev"
+    repo: "https://github.com/alexrivera/sqlens"
+    tags: [TypeScript, React, PostgreSQL]
+    highlights:
+      - Featured in Postgres Weekly newsletter.
+      - Processes 5,000+ queries per day from 800+ registered users.
+      - Saved one user 3 hours of debugging a slow report query.
+
+  - name: DevfolioKit
+    description: Open-source developer portfolio and CV starter template. Configure once in YAML, deploy anywhere.
+    repo: "https://github.com/alexrivera/devfoliokit"
+    tags: [Astro, TypeScript, Open Source]
+
+education:
+  - institution: University of Texas at Austin
+    degree: B.S. Computer Science
+    start: "2013"
+    end: "2017"
+    notes: "Concentration in Systems. Dean's List 2015–2017."
+
+certifications:
+  - name: AWS Solutions Architect – Associate
+    issuer: Amazon Web Services
+    date: "2023-04"
+    url: "https://aws.amazon.com/certification/"
+  - name: Certified Kubernetes Administrator (CKA)
+    issuer: Cloud Native Computing Foundation
+    date: "2022-11"
+    url: "https://www.cncf.io/certification/cka/"
+
+resume:
+  path: "/resume.pdf"
+  label: "Download Resume"
+
+settings:
+  layout: minimal
+  theme: system
+  sections:
+    - about
+    - experience
+    - projects
+    - skills
+    - education
+    - certifications
+    - contact

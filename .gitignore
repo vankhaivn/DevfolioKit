@@ -1,0 +1,25 @@
+# Build output
+dist/
+.astro/
+
+# Dependencies
+node_modules/
+.pnpm-store/
+
+# Real user config — never commit personal data
+config/devfolio.yaml
+
+# Environment
+.env
+.env.*
+!.env.example
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/settings.json
+.idea/
+*.swp
+*.swo

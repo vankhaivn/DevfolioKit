@@ -1,0 +1,78 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import Header from '../components/Header.astro';
+import About from '../components/sections/About.astro';
+import Experience from '../components/sections/Experience.astro';
+import Projects from '../components/sections/Projects.astro';
+import Skills from '../components/sections/Skills.astro';
+import Education from '../components/sections/Education.astro';
+import Contact from '../components/sections/Contact.astro';
+import type { Config } from '../lib/schema.js';
+
+interface Props {
+  config: Config;
+}
+
+const { config } = Astro.props;
+
+const sections = config.settings.sections ?? [
+  'about', 'experience', 'projects', 'skills', 'education', 'certifications', 'contact',
+];
+
+const showSection = (name: string) => sections.includes(name);
+---
+
+<BaseLayout config={config}>
+  <div class="layout-minimal">
+    <div class="container">
+      <Header config={config} />
+
+      <main id="main-content">
+        {showSection('about') && <About config={config} />}
+        {showSection('experience') && config.experience && config.experience.length > 0 && (
+          <Experience experience={config.experience} />
+        )}
+        {showSection('projects') && config.projects && config.projects.length > 0 && (
+          <Projects projects={config.projects} variant="list" />
+        )}
+        {showSection('skills') && config.skills && config.skills.length > 0 && (
+          <Skills skills={config.skills} />
+        )}
+        {(showSection('education') || showSection('certifications')) && (
+          <Education
+            education={showSection('education') ? config.education : []}
+            certifications={showSection('certifications') ? config.certifications : []}
+          />
+        )}
+        {showSection('contact') && <Contact config={config} />}
+      </main>
+
+      <footer class="site-footer">
+        <p>Built with <a href="https://github.com/devfoliokit/devfoliokit" target="_blank" rel="noopener noreferrer">DevfolioKit</a></p>
+      </footer>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .layout-minimal {
+    min-height: 100dvh;
+    padding-bottom: 4rem;
+  }
+
+  .site-footer {
+    padding-top: 3rem;
+    padding-bottom: 1rem;
+    text-align: center;
+    font-size: 0.75rem;
+    color: var(--color-text-subtle);
+  }
+
+  .site-footer a {
+    color: var(--color-text-subtle);
+  }
+
+  .site-footer a:hover {
+    color: var(--color-accent);
+  }
+</style>
