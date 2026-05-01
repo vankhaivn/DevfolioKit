@@ -12,69 +12,69 @@ All portfolio data is driven by a single YAML file.
 # Site metadata
 # ─────────────────────────────────────────────
 site:
-  title: string            # Browser tab title and OG title
-  description: string      # Meta description and OG description
-  url: string (optional)   # Canonical URL, e.g. https://yourname.dev
+  title: string # Browser tab title and OG title
+  description: string # Meta description and OG description
+  url: string (optional) # Canonical URL, e.g. https://yourname.dev
   ogImage: string (optional) # Path to OG image, e.g. /og.png
 
 # ─────────────────────────────────────────────
 # Developer profile
 # ─────────────────────────────────────────────
 profile:
-  name: string             # Full name
-  headline: string         # One-line professional summary
-  summary: string          # Multi-line bio (supports newlines)
+  name: string # Full name
+  headline: string # One-line professional summary
+  summary: string # Multi-line bio (supports newlines)
   location: string (optional)
-  avatar: string (optional) # Path, e.g. /avatar.jpg
+  avatar: string (optional) # Path, e.g. /avatar.svg
   email: string (optional)
   phone: string (optional)
 
 # ─────────────────────────────────────────────
 # Social links
 # ─────────────────────────────────────────────
-social:                    # optional list
+social: # optional list
   - platform: github | linkedin | twitter | mastodon | youtube | website | ...
-    url: string            # Full URL
+    url: string # Full URL
     label: string (optional) # Display label
 
 # ─────────────────────────────────────────────
 # Skills
 # ─────────────────────────────────────────────
-skills:                    # optional list
-  - category: string       # e.g. "Languages", "Frontend", "Infrastructure"
+skills: # optional list
+  - category: string # e.g. "Languages", "Frontend", "Infrastructure"
     items:
       - string
 
 # ─────────────────────────────────────────────
 # Work experience
 # ─────────────────────────────────────────────
-experience:                # optional list
+experience: # optional list
   - company: string
     role: string
-    start: string          # e.g. "2022-03" or "2022"
+    start: string # e.g. "2022-03" or "2022"
     end: string (optional) # omit for current role
     location: string (optional)
     summary: string (optional)
-    highlights:            # optional list of bullet points
+    highlights: # optional list of bullet points
       - string
 
 # ─────────────────────────────────────────────
 # Projects
 # ─────────────────────────────────────────────
-projects:                  # optional list
+projects: # optional list
   - name: string
     description: string
-    url: string (optional)  # Live URL
+    url: string (optional) # Live URL
     repo: string (optional) # Git repo URL
-    tags:                   # optional list
+    tags: # optional list
       - string
-    highlights:             # optional list
+    highlights: # optional list
       - string
 
 # ─────────────────────────────────────────────
 # Education
 # ─────────────────────────────────────────────
-education:                 # optional list
+education: # optional list
   - institution: string
     degree: string
     field: string (optional)
@@ -85,7 +85,7 @@ education:                 # optional list
 # ─────────────────────────────────────────────
 # Certifications
 # ─────────────────────────────────────────────
-certifications:            # optional list
+certifications: # optional list
   - name: string
     issuer: string
     date: string (optional)
@@ -94,17 +94,17 @@ certifications:            # optional list
 # ─────────────────────────────────────────────
 # Resume PDF
 # ─────────────────────────────────────────────
-resume:                    # optional
-  path: string             # e.g. /resume.pdf (place file in public/)
+resume: # optional
+  path: string # e.g. /resume.pdf (place file in public/)
   label: string (optional) # Button label, default "Download Resume"
 
 # ─────────────────────────────────────────────
 # Site settings
 # ─────────────────────────────────────────────
 settings:
-  layout: minimal | engineer   # Which layout to use
+  layout: minimal | engineer # Which layout to use
   theme: light | dark | system # Default theme
-  sections:                    # optional — ordered list of visible sections
+  sections: # optional — ordered list of visible sections
     - about
     - experience
     - projects
@@ -119,6 +119,7 @@ settings:
 Run `pnpm validate` to check your config. Errors will point to the failing field.
 
 Common issues:
+
 - `url` fields must be valid URLs (include `https://`).
 - `email` must be a valid email format.
 - `settings.layout` must be exactly `minimal` or `engineer`.

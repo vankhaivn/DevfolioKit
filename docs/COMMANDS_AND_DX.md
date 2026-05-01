@@ -2,14 +2,14 @@
 
 ## Available Commands
 
-| Command | Description |
-|---|---|
-| `pnpm install` | Install all dependencies |
-| `pnpm dev` | Start Astro dev server (hot reload) |
-| `pnpm build` | Production build to `dist/` |
-| `pnpm preview` | Preview production build locally |
-| `pnpm validate` | Validate `config/devfolio.yaml` (or example) against schema |
-| `pnpm launch` | Magic command: bootstrap config → validate → start dev server |
+| Command         | Description                                                   |
+| --------------- | ------------------------------------------------------------- |
+| `pnpm install`  | Install all dependencies                                      |
+| `pnpm dev`      | Start Astro dev server (hot reload)                           |
+| `pnpm build`    | Production build to `dist/`                                   |
+| `pnpm preview`  | Preview production build locally                              |
+| `pnpm validate` | Validate `config/devfolio.yaml` (or example) against schema   |
+| `pnpm launch`   | Magic command: bootstrap config → validate → start dev server |
 
 ## pnpm launch (Magic Command)
 
@@ -20,6 +20,7 @@ pnpm launch
 ```
 
 What it does:
+
 1. Checks if `config/devfolio.yaml` exists.
 2. If not, copies `config/devfolio.example.yaml` → `config/devfolio.yaml`.
 3. Prints a message telling the user to edit their config.
@@ -36,15 +37,15 @@ Scripts are TypeScript files in `scripts/` run with `tsx`.
 
 ## Config Location
 
-| File | Purpose | Committed? |
-|---|---|---|
-| `config/devfolio.example.yaml` | Demo data, template | Yes |
-| `config/devfolio.yaml` | Your real config | No (gitignored) |
+| File                           | Purpose             | Committed?      |
+| ------------------------------ | ------------------- | --------------- |
+| `config/devfolio.example.yaml` | Demo data, template | Yes             |
+| `config/devfolio.yaml`         | Your real config    | No (gitignored) |
 
 ## First-Time Setup
 
 ```bash
-git clone https://github.com/your-username/DevfolioKit.git my-portfolio
+git clone https://github.com/vankhaivn/DevfolioKit.git my-portfolio
 cd my-portfolio
 pnpm launch
 # Edit config/devfolio.yaml
@@ -56,6 +57,7 @@ pnpm launch
 If `pnpm validate` fails, errors show the failing field path and expected type.
 
 Example:
+
 ```
 ✗ Config validation failed:
   - settings.layout: Invalid enum value. Expected 'minimal' | 'engineer', received 'fullpage'

@@ -5,7 +5,7 @@ Thanks for your interest in contributing!
 ## Development Setup
 
 ```bash
-git clone https://github.com/your-username/DevfolioKit.git
+git clone https://github.com/vankhaivn/DevfolioKit.git
 cd DevfolioKit
 pnpm install
 pnpm launch

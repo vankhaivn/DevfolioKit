@@ -9,13 +9,14 @@ Clone → Edit YAML → Run one command → Polished portfolio on localhost.
 ## Quick Start
 
 ```bash
-git clone https://github.com/your-username/DevfolioKit.git my-portfolio
+git clone https://github.com/vankhaivn/DevfolioKit.git my-portfolio
 cd my-portfolio
 pnpm install
 pnpm launch
 ```
 
 `pnpm launch` will:
+
 1. Copy the example config to `config/devfolio.yaml` if it doesn't exist.
 2. Validate your config.
 3. Start the dev server at `http://localhost:4321`.
@@ -34,7 +35,7 @@ profile:
   headline: "Your Headline"
   summary: "Your bio..."
   location: "City, Country"
-  avatar: "/avatar.jpg"  # place image in public/
+  avatar: "/avatar.svg" # place image in public/
   email: "you@example.com"
 ```
 
@@ -46,14 +47,14 @@ See [docs/CONFIG_SPEC.md](docs/CONFIG_SPEC.md) for the full schema reference.
 
 Set `settings.layout` in your YAML:
 
-| Layout | Description |
-|---|---|
-| `minimal` | Compact, CV-like, single-column. Great for traditional resumes. |
+| Layout     | Description                                                                   |
+| ---------- | ----------------------------------------------------------------------------- |
+| `minimal`  | Compact, CV-like, single-column. Great for traditional resumes.               |
 | `engineer` | Two-column with prominent project cards. Great for showcasing technical work. |
 
 ```yaml
 settings:
-  layout: minimal  # or: engineer
+  layout: minimal # or: engineer
 ```
 
 ---
@@ -62,10 +63,10 @@ settings:
 
 Set `settings.theme` to control the default:
 
-| Value | Behavior |
-|---|---|
-| `light` | Always light mode |
-| `dark` | Always dark mode |
+| Value    | Behavior                        |
+| -------- | ------------------------------- |
+| `light`  | Always light mode               |
+| `dark`   | Always dark mode                |
 | `system` | Follows visitor's OS preference |
 
 Visitors can toggle the theme using the button in the header.
@@ -109,6 +110,7 @@ pnpm validate   # Validate config/devfolio.yaml
 See [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md) for the full guide.
 
 Quick version:
+
 1. Push your fork to GitHub.
 2. Import the repo at [vercel.com](https://vercel.com).
 3. Framework: Astro (auto-detected). Build: `pnpm build`. Output: `dist`.
