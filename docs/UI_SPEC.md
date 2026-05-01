@@ -1,140 +1,203 @@
-# UI Spec — DevfolioKit
+# UI Spec — DevfolioKit (Modernized)
 
 ## Design Principles
 
-- Modern, professional, clean.
-- Not overly colorful — developer CV, not a marketing site.
-- Responsive: works on mobile and desktop.
-- Accessible: semantic HTML, good contrast, keyboard navigable.
-- Fast: static HTML, minimal JavaScript.
+### Modern & Premium
 
-## Theming
+Minimalist but sophisticated. Use ample whitespace to let the content breathe and avoid a cluttered, "newspaper-like" look.
 
-### Theme Values
+### Visual Hierarchy
 
-| Value | Behavior |
-|---|---|
-| `light` | Always light mode |
-| `dark` | Always dark mode |
-| `system` | Follows OS preference |
+Rely on font weights and shades of gray (Slate/Zinc) to establish hierarchy rather than just pure black and white.
 
-### Implementation
+### Subtle Containers
 
-- `data-theme` attribute on `<html>` element.
-- CSS variables under `:root` for light mode, `[data-theme="dark"]` for dark.
-- `ThemeToggle` React island persists preference to `localStorage` as `devfolio-theme`.
-- Inline script in `<head>` applies correct theme before first paint (no FOUC).
+Instead of plain text sections, group elements like Projects, Contact, and Education into "Cards" with subtle borders (1px solid) and soft rounded corners (rounded-xl or rounded-2xl).
 
-### CSS Variables
+### Responsive & Fluid
+
+Seamlessly adapts to all devices, from mobile to ultra-wide desktop monitors.
+
+### Accessible & Fast
+
+Semantic HTML, high contrast, keyboard navigable, static HTML with minimal JavaScript.
+
+---
+
+## Theming & Typography
+
+### Typography
+
+#### Primary Font
+
+Recommend modern Sans-serif typefaces like Inter, Geist, Plus Jakarta Sans, or a clean system-ui fallback.
+
+### Theme Values & Implementation
+
+| Value  | Behavior              |
+| ------ | --------------------- |
+| light  | Always light mode     |
+| dark   | Always dark mode      |
+| system | Follows OS preference |
+
+- `data-theme` attribute on the `<html>` element.
+- ThemeToggle React island persists user preference to localStorage as `devfolio-theme`.
+- Inline script in `<head>` applies the correct theme before the first paint to prevent FOUC (Flash of Unstyled Content).
+
+### Colors (Slate / Zinc Palette)
+
+Move away from basic grays and use Slate or Zinc palettes for more depth. Add smooth transitions for hover states (`transition-all duration-200`).
 
 ```css
 :root {
-  --color-bg: #ffffff;
-  --color-surface: #f8f9fa;
-  --color-border: #e5e7eb;
-  --color-text: #111827;
-  --color-text-muted: #6b7280;
-  --color-accent: #2563eb;
-  --color-accent-hover: #1d4ed8;
+  --color-bg: #f8fafc; /* slate-50 */
+  --color-surface: #ffffff;
+  --color-border: #e2e8f0; /* slate-200 */
+  --color-text: #0f172a; /* slate-900 */
+  --color-text-muted: #64748b; /* slate-500 */
+  --color-accent: #2563eb; /* blue-600 */
+  --color-accent-hover: #1d4ed8; /* blue-700 */
 }
 
 [data-theme="dark"] {
-  --color-bg: #0f172a;
-  --color-surface: #1e293b;
-  --color-border: #334155;
-  --color-text: #f1f5f9;
-  --color-text-muted: #94a3b8;
-  --color-accent: #60a5fa;
-  --color-accent-hover: #93c5fd;
+  --color-bg: #020617; /* slate-950 */
+  --color-surface: #0f172a; /* slate-900 */
+  --color-border: #1e293b; /* slate-800 */
+  --color-text: #f8fafc; /* slate-50 */
+  --color-text-muted: #94a3b8; /* slate-400 */
+  --color-accent: #3b82f6; /* blue-500 */
+  --color-accent-hover: #60a5fa; /* blue-400 */
 }
 ```
 
+---
+
 ## Layouts
 
-### Minimal Layout
+### 1. Minimal Layout
 
-- Constrained max-width (~800px), centered.
-- Single column.
-- Header: name, headline, theme toggle, resume button.
-- Sections below in order: About, Experience, Projects, Skills, Education, Contact.
-- CV-like typography — clear section headings, compact spacing.
+#### Container
 
-### Engineer Layout
+Constrained max-width (~800px), centered for a CV-like reading experience.
 
-- Wider max-width (~1100px), centered.
-- Header: name, headline, theme toggle, resume button.
-- Two-column on desktop: sidebar (skills, contact, links) + main (experience, projects).
-- Projects section is visually prominent with cards.
-- Skills shown as tag groups.
+#### Header
 
-## Components
+Sticky or generously padded at the top. Features a subtle fade or glassmorphism (backdrop-blur) effect when scrolling.
+
+#### Experience
+
+Rendered as a Vertical Timeline (a vertical line with dots connecting roles) to break the monotony of plain text.
+
+#### Projects
+
+Displayed as a clean list with subtle background highlight effects upon hover.
+
+### 2. Engineer Layout
+
+#### Container
+
+Wider max-width (~1024px - 1100px), centered.
+
+#### Hero Section
+
+Large, bold Name and a prominent Headline. Includes circular social links next to the "Download Resume" button.
+
+#### Skills
+
+Displayed as "Bento boxes" or pill-shaped badges (e.g., bg-slate-100 in light mode) for a modern feel.
+
+#### Projects
+
+2-column Grid layout. Projects are placed inside Cards featuring thin borders, subtle drop shadows on hover, and an arrow -> indicator that appears on mouse-over.
+
+---
+
+## Components Specification
 
 ### Header
 
-- Name (large, bold)
-- Headline (muted, below name)
-- Location (optional)
-- Theme toggle button (top right)
-- Resume download button (visible if `resume.path` set)
+#### Name
 
-### ThemeToggle (React island)
+Large, bold, tight tracking.
 
-- Icon button cycling: light → dark → system → light
-- Reads initial state from `localStorage.devfolio-theme`
-- Updates `data-theme` on `document.documentElement`
-- Shows appropriate icon (sun / moon / monitor)
+#### Headline
 
-### ResumeButton
+Muted text, placed right below the name.
 
-- `<a download>` link to `resume.path`
-- Hidden if `resume` not set in config
+#### Theme Toggle
 
-### Section: About
+Icon button cycling (Sun → Moon → Monitor).
 
-- Summary paragraph
-- Location badge (optional)
-- Contact row: email, social icons
+#### Resume Button
 
-### Section: Experience
+Prominent CTA button, hidden if resume.path is not configured.
 
-- Timeline list
-- Each item: company, role, dates, location, summary, highlights
-- Current role: no end date shown or "Present"
+### Section: Skills (Badges / Pills)
 
-### Section: Projects
+Rendered as rounded tags:
 
-- Card grid (engineer) or compact list (minimal)
-- Each card: name, description, tags, links (live / repo)
-- Highlights as bullets if present
+```html
+<span
+  class="px-3 py-1 bg-slate-100 text-slate-700 rounded-full text-sm font-medium"
+></span>
+```
 
-### Section: Skills
+Grouped by category (Frontend, Backend, Infrastructure).
 
-- Category groups
-- Tags/badges per item
+### Section: Experience (Timeline)
 
-### Section: Education
+#### Left/Top
 
-- Institution, degree, dates
-- Notes (optional)
+Dates (styled with uppercase, small, muted text: uppercase text-xs text-muted).
 
-### Section: Contact
+#### Right/Bottom
 
-- Social links with icons
-- Email (if set)
-- Phone (if set)
+Company (bold) and Role.
+
+Includes bullet points for highlights, using an accent-colored bullet or icon (e.g., ▹).
+
+### Section: Projects (Cards)
+
+#### Container
+
+Large rounded corners (rounded-2xl), background contrasting slightly with the main app background (e.g., White card on a Slate-50 background).
+
+#### Content
+
+Title, description, tags (using the Skill Badge style), and external/repo links.
+
+### Section: Contact & Education
+
+#### Education
+
+Structured similarly to Experience but without the heavy timeline styling.
+
+#### Contact
+
+Clean row or grid of social links and email, utilizing recognizable standard icons (Lucide or similar).
+
+---
 
 ## Accessibility
 
-- All interactive elements are keyboard accessible.
-- Images have `alt` attributes.
-- Color contrast meets WCAG AA.
-- Semantic heading hierarchy (h1 → h2 → h3).
-- `aria-label` on icon-only buttons.
+All interactive elements are keyboard accessible (tab index, focus rings).
+
+Images and icons must have alt attributes or aria-labels.
+
+Color contrast strictly meets WCAG AA standards.
+
+Semantic heading hierarchy enforced (h1 → h2 → h3).
+
+---
 
 ## SEO
 
-- `<title>` from `site.title`
-- `<meta name="description">` from `site.description`
-- Open Graph: `og:title`, `og:description`, `og:image`, `og:url`
-- Twitter: `twitter:card`, `twitter:title`, `twitter:description`
-- Canonical URL if `site.url` is set
+`<title>` is populated from site.title.
+
+`<meta name="description">` is populated from site.description.
+
+Open Graph tags included: og:title, og:description, og:image, og:url.
+
+Twitter Cards setup: twitter:card, twitter:title, twitter:description.
+
+Canonical URL included if site.url is provided.
