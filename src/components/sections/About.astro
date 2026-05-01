@@ -10,7 +10,8 @@ interface Props {
 }
 
 const { config, variant = 'default' } = Astro.props;
-const { profile, social } = config;
+const { profile } = config;
+const social = config.social?.filter((s) => s.enabled !== false);
 ---
 
 <section class="section about-section" id="about" aria-labelledby="about-heading">

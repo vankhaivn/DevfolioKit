@@ -30,6 +30,10 @@ social:
   - platform: twitter
     url: "https://twitter.com/alexrivera"
     label: "@alexrivera"
+  - platform: mastodon
+    url: "https://mastodon.social/@alexrivera"
+    label: "@alexrivera@mastodon.social"
+    enabled: false  # set to true to show this link
 
 skills:
   - category: Languages

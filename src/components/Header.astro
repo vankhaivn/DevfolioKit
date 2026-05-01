@@ -14,7 +14,8 @@ interface Props {
 }
 
 const { config } = Astro.props;
-const { profile, social, resume } = config;
+const { profile, resume } = config;
+const social = config.social?.filter((s) => s.enabled !== false);
 
 // Detect whether a physical resume file exists in public/
 // If yes → download mode. If no → print/export mode (always show the button).

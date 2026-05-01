@@ -36,6 +36,7 @@ social: # optional list
   - platform: github | linkedin | twitter | mastodon | youtube | website | ...
     url: string # Full URL
     label: string (optional) # Display label
+    enabled: boolean (optional, default: true) # Set to false to hide without removing the entry
 
 # ─────────────────────────────────────────────
 # Skills

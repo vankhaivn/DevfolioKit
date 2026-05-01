@@ -4,6 +4,7 @@ const SocialLink = z.object({
   platform: z.string(),
   url: z.string().url(),
   label: z.string().optional(),
+  enabled: z.boolean().default(true),
 });
 
 const SkillGroup = z.object({
