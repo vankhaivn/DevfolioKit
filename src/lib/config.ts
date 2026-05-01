@@ -1,7 +1,7 @@
 import yaml from 'js-yaml';
 import fs from 'node:fs';
 import path from 'node:path';
-import { configSchema, type Config } from './schema.js';
+import { configSchema, type Config } from '@/lib/schema.js';
 
 export function loadConfig(): Config {
   const root = process.cwd();

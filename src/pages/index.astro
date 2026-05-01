@@ -1,7 +1,7 @@
 ---
-import { loadConfig } from '../lib/config.js';
-import MinimalLayout from '../layouts/MinimalLayout.astro';
-import EngineerLayout from '../layouts/EngineerLayout.astro';
+import { loadConfig } from '@/lib/config.js';
+import MinimalLayout from '@/layouts/MinimalLayout.astro';
+import EngineerLayout from '@/layouts/EngineerLayout.astro';
 
 const config = loadConfig();
 const layout = config.settings.layout;

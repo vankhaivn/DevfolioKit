@@ -94,6 +94,7 @@ DevfolioKit/
 - Scripts run with `tsx` (TypeScript execution, no compilation step).
 - No debug `console.log` left in shipped code.
 - No backend, no database, no auth — static site only.
+- **Path alias `@/` maps to `src/`** — use `@/lib/schema.js`, `@/components/Header.astro`, etc. Do not use `../` relative imports. Configured in both `tsconfig.json` (paths) and `astro.config.mjs` (Vite alias).
 
 ---
 

@@ -1,7 +1,7 @@
 import yaml from 'js-yaml';
 import fs from 'node:fs';
 import path from 'node:path';
-import { configSchema } from '../src/lib/schema.js';
+import { configSchema } from '@/lib/schema.js';
 import { ZodError } from 'zod';
 
 const root = process.cwd();
