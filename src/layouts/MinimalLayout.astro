@@ -60,6 +60,13 @@ const showSection = (name: string) => sections.includes(name);
     padding-bottom: 4rem;
   }
 
+  @media print {
+    .layout-minimal {
+      min-height: 0;
+      padding-bottom: 0;
+    }
+  }
+
   .site-footer {
     padding-top: 3rem;
     padding-bottom: 1rem;

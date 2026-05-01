@@ -134,7 +134,9 @@ Icon button toggling between Minimal (single-column) and Engineer (sidebar + gri
 
 #### Resume Button
 
-Prominent CTA button, hidden if resume.path is not configured.
+Always visible in the header. Two modes:
+- **Download mode** — when `public/resume.pdf` exists at build time. Clicking downloads the file.
+- **Export mode** — when no PDF is present. Clicking opens the browser print-to-PDF dialog for a clean PDF export of the current page.
 
 ### Section: Skills (Badges / Pills)
 

@@ -68,7 +68,7 @@ DevfolioKit/
 └── src/
     ├── components/
     │   ├── sections/          ← About, Experience, Projects, Skills, etc.
-    │   └── ui/                ← ThemeToggle (React), ResumeButton, etc.
+    │   └── ui/                ← ThemeToggle (React), LayoutToggle (React), ResumeButton, etc.
     ├── layouts/
     │   ├── BaseLayout.astro
     │   ├── MinimalLayout.astro

@@ -197,8 +197,7 @@ html[data-layout="engineer"] .layout-minimal  { display: none; }
     border-color: #cccccc !important;
   }
 
-  /* Avoid section breaks mid-content */
-  .section,
+  /* Avoid breaking individual items mid-content; sections can span pages naturally */
   .timeline-item,
   .cert-item,
   .edu-item {

@@ -67,6 +67,13 @@ const showSection = (name: string) => sections.includes(name);
     padding-bottom: 4rem;
   }
 
+  @media print {
+    .layout-engineer {
+      min-height: 0;
+      padding-bottom: 0;
+    }
+  }
+
   .engineer-grid {
     display: grid;
     grid-template-columns: 280px 1fr;

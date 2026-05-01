@@ -51,20 +51,27 @@ Called at build time inside Astro `---` frontmatter.
 
 ### `src/pages/index.astro`
 
-Entry point. Calls `loadConfig()`, selects layout based on `settings.layout`.
+Entry point. Calls `loadConfig()`, passes config to both layouts inside a single `<BaseLayout>`.
 
 ### Layouts
 
-- `BaseLayout.astro` — HTML shell: `<head>` with SEO, theme script, global styles.
-- `MinimalLayout.astro` — Compact, CV-like single-column layout.
-- `EngineerLayout.astro` — Projects-prominent, technical-depth layout.
-
-Both extend `BaseLayout.astro`.
+- `BaseLayout.astro` — HTML shell: `<head>` with SEO, theme + layout inline scripts, global styles. Renders both layout fragments as children.
+- `MinimalLayout.astro` — Compact, CV-like single-column layout fragment (no `<BaseLayout>` wrapper).
+- `EngineerLayout.astro` — Projects-prominent, technical-depth layout fragment (no `<BaseLayout>` wrapper).
 
 ### Sections
 
 Stateless Astro components. Each accepts typed props from config.
 Located in `src/components/sections/`.
+
+### Resume / Export PDF
+
+`Header.astro` checks at build time (via `existsSync`) whether `public/resume.pdf` (or the configured `resume.path`) exists:
+
+- **File exists** → `ResumeButton` renders in `download` mode — a standard `<a download>` link.
+- **File absent** → `ResumeButton` renders in `print` mode — a `<button onclick="window.print()">` that triggers the browser's print-to-PDF dialog.
+
+The button is always rendered regardless of whether `resume` is configured in YAML. `@media print` CSS hides interactive UI (header actions, footer) and flattens the layout for clean output.
 
 ### React Islands
 

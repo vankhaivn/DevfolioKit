@@ -78,17 +78,19 @@ settings:
 
 ---
 
-## Resume PDF
+## Resume / Export PDF
 
-Place your PDF at `public/resume.pdf` and set it in your config:
+The header always shows a resume button. Behavior depends on whether a PDF exists:
 
-```yaml
-resume:
-  path: "/resume.pdf"
-  label: "Download Resume"
-```
+- **PDF present** — place your file at `public/resume.pdf` and configure its path. The button downloads it directly.
 
-The download button appears automatically in the header.
+  ```yaml
+  resume:
+    path: "/resume.pdf"
+    label: "Download Resume"
+  ```
+
+- **No PDF** — if `public/resume.pdf` does not exist (or `resume` is not configured), the button switches to **Export as PDF** mode and triggers the browser's print-to-PDF dialog instead.
 
 ---
 
