@@ -152,6 +152,61 @@ p {
 html[data-layout="minimal"]  .layout-engineer { display: none; }
 html[data-layout="engineer"] .layout-minimal  { display: none; }
 
+/* ─── Print / Export as PDF ──────────────────────────────────────────────── */
+
+@media print {
+  /* Force white background + black text */
+  html, body {
+    background: #ffffff !important;
+    color: #000000 !important;
+  }
+
+  /* Hide interactive UI — toggles, export button, footer branding */
+  .header-actions,
+  .site-footer {
+    display: none !important;
+  }
+
+  /* Static header — no sticky, no border */
+  .site-header {
+    position: static !important;
+    border-bottom: none !important;
+    padding-block: 1rem !important;
+    background: transparent !important;
+  }
+
+  /* Engineer sidebar — unstick for print */
+  .engineer-sidebar {
+    position: static !important;
+  }
+
+  /* Engineer grid → single column for print */
+  .engineer-grid {
+    display: block !important;
+  }
+
+  /* Timeline dot uses accent color — make it print-friendly */
+  .timeline-dot {
+    background-color: #000000 !important;
+    border-color: #ffffff !important;
+  }
+
+  /* Cards — remove shadows, lighten borders */
+  .card {
+    box-shadow: none !important;
+    border-color: #cccccc !important;
+  }
+
+  /* Avoid section breaks mid-content */
+  .section,
+  .timeline-item,
+  .cert-item,
+  .edu-item {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+}
+
 /* ─── Scrollbar ───────────────────────────────────────────────────────────── */
 
 ::-webkit-scrollbar {
